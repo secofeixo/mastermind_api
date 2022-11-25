@@ -15,5 +15,3 @@ class IGameRepository(ABC):
     @abstractmethod
     def getGame(self, game: Game) -> Game:
         pass
-
-

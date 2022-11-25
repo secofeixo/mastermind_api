@@ -6,7 +6,7 @@ import uuid
 
 
 class Game():  # AggregateRoot or Entity
-    def __init__(self, number_guesses: int, secret_code: Optional[str] = None, game_id: Optional[str] = None):
+    def __init__(self, number_guesses: Optional[int] = 10, secret_code: Optional[str] = None, game_id: Optional[str] = None):
         self.num_guesses = number_guesses
         self.secret_code = SecretCode.create(secret_code)
         self.guesses = []
