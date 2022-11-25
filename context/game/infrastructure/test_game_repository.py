@@ -38,7 +38,7 @@ def test_get_game():
 
 
 def test_get_wrong_game():
-    game_to_get = Game(game_id=uuid.uuid4())
+    game_to_get = Game(game_id=str(uuid.uuid4()))
     with pytest.raises(Exception) as exception:
         game_read = game_repository.getGame(game_to_get)
         assert str(exception) == 'Secret code already found'

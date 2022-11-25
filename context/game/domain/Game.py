@@ -15,7 +15,7 @@ class Game():  # AggregateRoot or Entity
 
     @staticmethod
     def generate_game_id() -> str:
-        return uuid.uuid4()
+        return str(uuid.uuid4())
 
     def add_guess(self, code: str) -> GuessResult:
         if len(self.guesses) > self.num_guesses:
