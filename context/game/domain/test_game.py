@@ -1,6 +1,5 @@
-from Game import Game
-from Guess import Guess
-from SecretCode import SecretCode
+import pytest
+from context.game.domain.Game import Game
 
 
 def test_game():
@@ -31,14 +30,9 @@ def test_add_wrong_guess_and_exceeding_limit():
     assert len(game.guesses) == 1
 
     # adding second guess when limit is 1
-    guess_result_limit = None
-    try:
-        guess_result_limit = game.add_guess('ABBB')
-    except Exception as e:
-        assert str(e) == 'Sorry the game is over'
-        guess_result_limit = None
-    finally:
-        assert guess_result_limit is None
+    with pytest.raises(Exception) as exception:
+        game.add_guess('ABBB')
+        assert str(exception) == 'Sorry the game is over'
 
 
 def test_add_correct_guess_and_trying_new_guess():
@@ -51,11 +45,6 @@ def test_add_correct_guess_and_trying_new_guess():
     assert len(game_correct.guesses) == 1
     assert game_correct.success_guess is True
     # test_after_correct_guess
-    guess_result_limit = None
-    try:
-        guess_result_limit = game_correct.add_guess('ABBR')
-    except Exception as e:
-        assert str(e) == 'Secret code already found'
-        guess_result_limit = None
-    finally:
-        assert guess_result_limit is None
+    with pytest.raises(Exception) as exception:
+        game_correct.add_guess('ABBR')
+        assert str(exception) == 'Secret code already found'

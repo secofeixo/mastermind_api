@@ -1,6 +1,6 @@
 # value object secret code
 from __future__ import annotations
-from SecretCode import SecretCode
+from context.game.domain.SecretCode import SecretCode
 
 
 class Guess():  # value object
@@ -11,6 +11,7 @@ class Guess():  # value object
     def verify_guess(self, secret_code: SecretCode) -> bool:
         # add algorithm to get white_pegs and black_pegs
         self.guess_result.correct = secret_code.equal_to(self.code)
+        return self.guess_result.correct
 
     @classmethod
     def create(self, code: str) -> Guess:

@@ -1,5 +1,5 @@
-from Guess import Guess
-from SecretCode import SecretCode
+from context.game.domain.Guess import Guess
+from context.game.domain.SecretCode import SecretCode
 
 
 def test_default_guess():

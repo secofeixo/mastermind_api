@@ -1,15 +1,21 @@
 from __future__ import annotations
 from typing import Optional
-from SecretCode import SecretCode
-from Guess import Guess, GuessResult
+from context.game.domain.SecretCode import SecretCode
+from context.game.domain.Guess import Guess, GuessResult
+import uuid
 
 
 class Game():  # AggregateRoot or Entity
-    def __init__(self, number_guesses: int, secret_code: Optional[str] = None):
+    def __init__(self, number_guesses: int, secret_code: Optional[str] = None, game_id: Optional[str] = None):
         self.num_guesses = number_guesses
         self.secret_code = SecretCode.create(secret_code)
         self.guesses = []
         self.success_guess = False
+        self.game_id = game_id if game_id is not None else self.generate_game_id()
+
+    @staticmethod
+    def generate_game_id() -> str:
+        return uuid.uuid4()
 
     def add_guess(self, code: str) -> GuessResult:
         if len(self.guesses) > self.num_guesses:
