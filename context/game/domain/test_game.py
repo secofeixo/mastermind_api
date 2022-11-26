@@ -1,5 +1,5 @@
 import pytest
-from context.game.domain.Game import Game, GAME_STATUS
+from context.game.domain.game import Game, GAME_STATUS
 from context.game.domain.exceptions import GameOverException, GameWonException
 
 

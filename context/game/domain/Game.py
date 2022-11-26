@@ -1,8 +1,8 @@
 from __future__ import annotations
 from enum import Enum
 from typing import Optional, List
-from context.game.domain.SecretCode import SecretCode
-from context.game.domain.Guess import Guess, GuessResult
+from context.game.domain.secret_code import SecretCode
+from context.game.domain.guess import Guess, GuessResult
 from context.game.domain.exceptions import GameOverException, GameWonException
 import uuid
 

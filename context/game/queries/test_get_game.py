@@ -1,9 +1,8 @@
-from context.game.command.createGame import CreateGameCommand
-from context.game.queries.getGame import GetGameQuery
-from context.game.infrastructure.gameRepositoryInMemory import GameRepositoryInMemory
-from context.game.mappers.gameDTO import GameDTO
+from context.game.command.create_game import CreateGameCommand
+from context.game.command.create_game_dto import CreateGameDTO
+from context.game.queries.get_game import GetGameQuery
+from context.game.infrastructure.game_repository_in_memory import GameRepositoryInMemory
 from context.game.domain.exceptions import GameNotExistsException
-import uuid
 import pytest
 
 gameRepository = GameRepositoryInMemory()
@@ -14,10 +13,10 @@ game_result = None
 def test_creating_game_command():
     global game_dto
     global game_result
-    game_dto = GameDTO(game_id=str(uuid.uuid4()), num_guesses=3, secret_code='AAAA')
+    create_dto = CreateGameDTO(num_max_guesses=3, secret_code='AAAA')
     commando = CreateGameCommand(gameRepository)
     with pytest.raises(Exception):
-        game_result = commando.run(game_dto)
+        game_result = commando.run(create_dto)
         assert False
 
     assert True
@@ -25,17 +24,15 @@ def test_creating_game_command():
 
 def test_getting_game():
     commando = GetGameQuery(gameRepository)
-    query_game = GameDTO(game_id=game_result.game_id)
-    result = commando.run(query_game)
+    result = commando.run(game_result.game_id)
     assert result.game_id == game_result.game_id
 
 
 def test_getting_wrong_game():
     commando = GetGameQuery(gameRepository)
     game_id = '1234'
-    query_game = GameDTO(game_id=game_id)
     result = None
     with pytest.raises(GameNotExistsException) as exception:
-        result = commando.run(query_game)
+        result = commando.run(game_id=game_id)
     assert str(exception.value) == f'Game {game_id} doesn\'t exists'
     assert result is None

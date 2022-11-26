@@ -1,6 +1,6 @@
 # value object secret code
 from __future__ import annotations
-from context.game.domain.SecretCode import SecretCode
+from context.game.domain.secret_code import SecretCode
 from context.game.domain.exceptions import CodeWrongException
 
 
@@ -34,6 +34,10 @@ class Guess():  # value object
 
 
 class GuessResult():
+    black_pegs: int
+    white_pegs: int
+    correct: bool
+
     def __init__(self, black_pegs: int, white_pegs: int, correct: bool):
         self.black_pegs = black_pegs
         self.white_pegs = white_pegs

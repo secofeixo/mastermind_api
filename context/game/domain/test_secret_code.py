@@ -1,4 +1,4 @@
-from context.game.domain.SecretCode import SecretCode
+from context.game.domain.secret_code import SecretCode
 
 
 def test_default_code():
