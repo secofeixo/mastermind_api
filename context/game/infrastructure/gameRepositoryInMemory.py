@@ -5,6 +5,8 @@ from context.game.domain.exceptions import GameAlreadyExistsException, GameNotEx
 
 
 class GameRepositoryInMemory(IGameRepository):
+    games: dict
+
     def __init__(self):
         self.games = {}
 

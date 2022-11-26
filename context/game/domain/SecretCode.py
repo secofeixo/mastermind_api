@@ -5,6 +5,8 @@ from context.game.domain.exceptions import CodeWrongException
 
 
 class SecretCode():  # value object
+    code: str
+
     def __init__(self, code: str):
         self.code = code
 

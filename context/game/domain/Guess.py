@@ -5,6 +5,9 @@ from context.game.domain.exceptions import CodeWrongException
 
 
 class Guess():  # value object
+    code: str
+    guess_result: GuessResult
+
     def __init__(self, code: str):
         self.code = code
         self.guess_result: GuessResult = GuessResult(0, 0, False)

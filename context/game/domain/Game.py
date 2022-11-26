@@ -1,6 +1,6 @@
 from __future__ import annotations
 from enum import Enum
-from typing import Optional
+from typing import Optional, List
 from context.game.domain.SecretCode import SecretCode
 from context.game.domain.Guess import Guess, GuessResult
 from context.game.domain.exceptions import GameOverException, GameWonException
@@ -14,13 +14,24 @@ class GAME_STATUS(str, Enum):
 
 
 class Game():  # AggregateRoot or Entity
-    def __init__(self, number_guesses: Optional[int] = 10, secret_code: Optional[str] = None, game_id: Optional[str] = None):
+    num_guesses: int
+    secret_code: SecretCode
+    guesses: List[Guess]
+    success_guess: bool
+    game_id: str
+    status: GAME_STATUS
+
+    def __init__(self,
+                 number_guesses: Optional[int] = 10,
+                 secret_code: Optional[str] = None,
+                 game_id: Optional[str] = None,
+                 status: Optional[GAME_STATUS] = None):
         self.num_guesses = number_guesses
         self.secret_code = SecretCode.create(secret_code)
         self.guesses = []
         self.success_guess = False
         self.game_id = game_id if game_id is not None else self.generate_game_id()
-        self.status = GAME_STATUS.PLAYING
+        self.status = GAME_STATUS.PLAYING if status is None else status
 
     @staticmethod
     def generate_game_id() -> str:
