@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Optional
 from context.game.domain.Game import Game
 
@@ -18,7 +19,9 @@ class GameDTO:
     def toEntity(self) -> Optional[Game]:
         return Game(self.num_guesses, self.secret_code, game_id=self.game_id)
 
-    def fromEntity(self, game: Game):
+    def fromEntity(self, game: Game) -> GameDTO:
         self.game_id = game.game_id
         self.num_guesses = game.num_guesses
-        self.secret_code = game.secret_code
+        self.secret_code = game.secret_code.code
+
+        return self

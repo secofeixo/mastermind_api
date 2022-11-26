@@ -9,6 +9,7 @@ class CreateGameCommand:
         self.game_repository = game_repository
         pass
 
-    def run(self, gameDTO: GameDTO):
+    def run(self, gameDTO: GameDTO) -> GameDTO:
         game = gameDTO.toEntity()
-        self.game_repository.addGame(game)
+        game_entity = self.game_repository.addGame(game)
+        return gameDTO.fromEntity(game_entity)
