@@ -1,6 +1,7 @@
 # value object secret code
 from __future__ import annotations
 from typing import Optional
+from context.game.domain.exceptions import CodeWrongException
 
 
 class SecretCode():  # value object
@@ -17,7 +18,7 @@ class SecretCode():  # value object
     @classmethod
     def create(self, code: Optional[str] = None) -> SecretCode:
         if code is not None and isinstance(code, str) is False:
-            raise Exception('Code is not a valid string')
+            raise CodeWrongException('Code is not a valid string')
 
         if code is None or len(code) < 4:
             code = SecretCode.generate_secret_code()

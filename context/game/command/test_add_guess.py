@@ -14,18 +14,16 @@ game = None
 def test_creating_game_command():
     global game_dto
     global game
-    game_dto = GameDTO(game_id=str(uuid.uuid4()), num_guesses=5, secret_code='AAAA')
+    game_dto = GameDTO(game_id=str(uuid.uuid4()), num_guesses=3, secret_code='AAAA')
     commando = CreateGameCommand(gameRepository)
     with pytest.raises(Exception):
         game = commando.run(game_dto)
         assert False
 
-    print('1', game_dto)
     assert True
 
 
-def test_adding_guess():
-    print('2', game_dto.secret_code)
+def test_adding_wrong_guess():
     guess_dto = GuessDTO(code='BBBB')
     commando = AddGuessCommand(gameRepository)
     result = commando.run(game_dto, guess_dto)
@@ -34,8 +32,7 @@ def test_adding_guess():
     assert result.correct is False
 
 
-def test_adding_guess():
-    print('2', game_dto.secret_code)
+def test_adding_correct_guess():
     guess_dto = GuessDTO(code='AAAA')
     commando = AddGuessCommand(gameRepository)
     result = commando.run(game_dto, guess_dto)

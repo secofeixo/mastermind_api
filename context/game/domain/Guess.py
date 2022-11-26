@@ -1,6 +1,7 @@
 # value object secret code
 from __future__ import annotations
 from context.game.domain.SecretCode import SecretCode
+from context.game.domain.exceptions import CodeWrongException
 
 
 class Guess():  # value object
@@ -16,7 +17,7 @@ class Guess():  # value object
     @classmethod
     def create(self, code: str) -> Guess:
         if code is not None and isinstance(code, str) is False:
-            raise Exception('Code is not a valid string')
+            raise CodeWrongException('Code is not a valid string')
 
         if code is None:
             return self('')

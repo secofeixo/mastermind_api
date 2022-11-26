@@ -1,6 +1,7 @@
 from context.game.infrastructure.gameRepositoryInMemory import GameRepositoryInMemory
 from context.game.domain.Game import Game
 from context.game.domain.Guess import Guess
+from context.game.domain.exceptions import GameNotExistsException
 import uuid
 import pytest
 
@@ -38,8 +39,8 @@ def test_get_game():
 
 
 def test_get_wrong_game():
-    game_to_get = Game(game_id=str(uuid.uuid4()))
-    with pytest.raises(Exception) as exception:
-        game_read = game_repository.getGame(game_to_get)
-        assert str(exception) == 'Secret code already found'
-        assert game_read is None
+    uuid4 = str(uuid.uuid4())
+    game_to_get = Game(game_id=uuid4)
+    with pytest.raises(GameNotExistsException) as exception:
+        game_repository.getGame(game_to_get)
+    assert str(exception.value) == f'Game {uuid4} doesn\'t exists'

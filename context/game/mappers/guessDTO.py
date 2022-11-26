@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Optional
 from context.game.domain.Guess import Guess, GuessResult
 
@@ -5,14 +6,15 @@ from context.game.domain.Guess import Guess, GuessResult
 class GuessDTO:
     code: str
 
-    def __init__(self, code: str):
+    def __init__(self, code: Optional[str] = None):
         self.code = code
 
     def toValueObject(self) -> Optional[Guess]:
         return Guess.create(self.code)
 
-    def fromValueObject(self, guess: Guess):
+    def fromValueObject(self, guess: Guess) -> GuessDTO:
         self.code = guess.code
+        return self
 
 
 class GuessResultDTO:
