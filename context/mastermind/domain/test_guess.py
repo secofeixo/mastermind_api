@@ -48,6 +48,7 @@ def test_checking_guess_one_but_in_wrong_position():
     assert guess.guess_result.black_pegs == 1
     assert guess.guess_result.white_pegs == 1
 
+
 def test_checking_guess_four_but_in_wrong_position():
     secret_code = SecretCode.create('YRBW', length=4)
     guess = Guess.create('WBRY', length_code=4)
