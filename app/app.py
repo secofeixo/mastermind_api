@@ -56,4 +56,3 @@ def on_startup():
 @app.get('/server-status')
 def get_status():
     return JSONResponse(content={'time': str(datetime.utcnow())})
-
