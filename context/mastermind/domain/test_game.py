@@ -28,7 +28,7 @@ def test_add_wrong_guess_and_exceeding_limit():
     # guess = Guess.create('BBBB') maybe better to create guess entity and check the entity??
     guess_result = game.add_guess('BBBB')
     assert guess_result.correct is False
-    assert guess_result.black_pegs == 0
+    assert guess_result.black_pegs == 2
     assert guess_result.white_pegs == 0
     assert len(game.guesses) == 1
 
@@ -45,7 +45,7 @@ def test_add_correct_guess_and_trying_new_guess():
     # guess = Guess.create('BBBB') maybe better to create guess entity and check the entity??
     guess_result = game_correct.add_guess('RBRB')
     assert guess_result.correct is True
-    assert guess_result.black_pegs == 0
+    assert guess_result.black_pegs == 4
     assert guess_result.white_pegs == 0
     assert len(game_correct.guesses) == 1
     assert game_correct.success_guess is True

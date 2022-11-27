@@ -11,16 +11,23 @@ class Guess():  # value object
 
     def __init__(self, code: SecretCode):
         self.code = code
-        self.guess_result: GuessResult = GuessResult(0, 0, False)
+        self.guess_result: GuessResult = GuessResult()
 
     def verify_guess(self, secret_code: SecretCode) -> bool:
-        # add algorithm to get white_pegs and black_pegs
-        self.guess_result.correct = secret_code.equal_to(self.code.code)
+
+        for index, color in enumerate(secret_code.code):
+            if any(color == c for c in self.code.code):
+                if secret_code.code[index] == self.code.code[index]:
+                    self.guess_result.black_pegs += 1
+                else:
+                    self.guess_result.white_pegs += 1
+
+        self.guess_result.correct = self.guess_result.black_pegs == 4
         return self.guess_result.correct
 
     @classmethod
-    def create(self, code: str) -> Guess:
-        secret_code = SecretCode.create(code)
+    def create(self, code: str, length_code: int) -> Guess:
+        secret_code = SecretCode.create(code, length_code)
 
         # all will be uppercase
         return self(secret_code)
@@ -33,10 +40,10 @@ class GuessResult():
     current_status: Optional[GAME_STATUS] = GAME_STATUS.PLAYING
 
     def __init__(self,
-                 black_pegs: int,
-                 white_pegs: int,
-                 correct: bool,
-                 status: Optional[GAME_STATUS]=GAME_STATUS.PLAYING):
+                 black_pegs: int = 0,
+                 white_pegs: int = 0,
+                 correct: bool = False,
+                 status: Optional[GAME_STATUS] = GAME_STATUS.PLAYING):
         self.black_pegs = black_pegs
         self.white_pegs = white_pegs
         self.correct = correct

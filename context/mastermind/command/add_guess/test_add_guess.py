@@ -35,6 +35,6 @@ def test_adding_correct_guess():
     add_guess_dto = AddGuessDto(game_id=game.game_id, code='RRRR')
     commando = AddGuessCommand(gameRepository)
     result = commando.run(add_guess_dto)
-    assert result.black_pegs == 0
+    assert result.black_pegs == 4
     assert result.white_pegs == 0
     assert result.correct is True

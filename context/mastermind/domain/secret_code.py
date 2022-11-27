@@ -13,6 +13,8 @@ class GuessColor(str, Enum):
     BLUE = "B"
     PINK = "P"
     GREEN = "G"
+    WHITE = "W"
+    MAGENTA = "M"
 
     def __str__(self) -> str:
         return self.value
@@ -20,9 +22,11 @@ class GuessColor(str, Enum):
 
 class SecretCode():  # value object
     code: str
+    length: int
 
-    def __init__(self, code: str):
+    def __init__(self, code: str, length: Optional[int] = 4):
         self.code = code
+        self.length = length
 
     def equal_to(self, code: str) -> bool:
         return self.code == code
@@ -36,12 +40,12 @@ class SecretCode():  # value object
         return code
 
     @classmethod
-    def create(self, code: Optional[str] = None) -> SecretCode:
+    def create(self, code: Optional[str] = None, length: int = 4) -> SecretCode:
         if code is not None and isinstance(code, str) is False:
             raise CodeWrongException('Code is not a valid string')
 
-        if code is None or len(code) < 4:
-            code = SecretCode.generate_secret_code()
+        if code is None or len(code) < length:
+            code = SecretCode.generate_secret_code(code_length=length)
             return self(code)
 
         guess_color_list = list(GuessColor)
@@ -50,8 +54,8 @@ class SecretCode():  # value object
                 raise CodeWrongException('Code is not a valid string')
 
         # check str is valid string of colors
-        if len(code) > 4:
-            code = code[:4]
+        if len(code) > length:
+            code = code[:length]
 
         # all will be uppercase
         return self(code.upper())
