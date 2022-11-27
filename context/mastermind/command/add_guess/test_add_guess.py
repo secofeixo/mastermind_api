@@ -1,8 +1,8 @@
-from context.game.command.create_game import CreateGameCommand
-from context.game.command.create_game_dto import CreateGameDTO
-from context.game.command.add_guess import AddGuessCommand
-from context.game.command.add_guess_dto import AddGuessDto
-from context.game.infrastructure.game_repository_in_memory import GameRepositoryInMemory
+from context.mastermind.command.create_game.create_game import CreateGameCommand
+from context.mastermind.command.create_game.create_game_dto import CreateGameDTO
+from context.mastermind.command.add_guess.add_guess import AddGuessCommand
+from context.mastermind.command.add_guess.add_guess_dto import AddGuessDto
+from context.mastermind.infrastructure.game_repository_in_memory import GameRepositoryInMemory
 import pytest
 
 gameRepository = GameRepositoryInMemory()
@@ -13,7 +13,7 @@ game = None
 def test_creating_game_command():
     global game_dto
     global game
-    game_dto = CreateGameDTO(num_max_guesses=3, secret_code='AAAA')
+    game_dto = CreateGameDTO(num_max_guesses=3, secret_code='RRRR')
     commando = CreateGameCommand(gameRepository)
     with pytest.raises(Exception):
         game = commando.run(game_dto)
@@ -32,7 +32,7 @@ def test_adding_wrong_guess():
 
 
 def test_adding_correct_guess():
-    add_guess_dto = AddGuessDto(game_id=game.game_id, code='AAAA')
+    add_guess_dto = AddGuessDto(game_id=game.game_id, code='RRRR')
     commando = AddGuessCommand(gameRepository)
     result = commando.run(add_guess_dto)
     assert result.black_pegs == 0

@@ -1,6 +1,6 @@
-from context.game.infrastructure.game_repository import IGameRepository
-from context.game.command.create_game_dto import CreateGameDTO
-from context.game.domain.game import Game
+from context.mastermind.infrastructure.game_repository import IGameRepository
+from context.mastermind.command.create_game.create_game_dto import CreateGameDTO
+from context.mastermind.domain.game import Game
 
 
 class CreateGameCommand:

@@ -1,5 +1,5 @@
-from context.game.infrastructure.game_repository import IGameRepository
-from context.game.domain.game import Game
+from context.mastermind.infrastructure.game_repository import IGameRepository
+from context.mastermind.domain.game import Game
 
 
 class GetGameQuery:

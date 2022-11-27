@@ -1,6 +1,6 @@
-from context.game.infrastructure.game_repository import IGameRepository
-from context.game.command.add_guess_dto import AddGuessDto
-from context.game.domain.guess import GuessResult
+from context.mastermind.infrastructure.game_repository import IGameRepository
+from context.mastermind.command.add_guess.add_guess_dto import AddGuessDto
+from context.mastermind.domain.guess import GuessResult
 
 
 class AddGuessCommand:

@@ -1,10 +1,10 @@
-from context.game.domain.guess import Guess
-from context.game.domain.secret_code import SecretCode
+from context.mastermind.domain.guess import Guess
+from context.mastermind.domain.secret_code import SecretCode
 
 
 def test_default_guess():
     guess = Guess.create('RBBR')
-    assert guess.code == 'RBBR'
+    assert guess.code.code == 'RBBR'
     assert guess.guess_result.black_pegs == 0
     assert guess.guess_result.white_pegs == 0
     assert guess.guess_result.correct is False
@@ -12,7 +12,7 @@ def test_default_guess():
 
 def test_checking_guess_with_secret_code():
     guess = Guess.create('RBBR')
-    secret_code = SecretCode.create()
+    secret_code = SecretCode.create('RBBR')
     guess.verify_guess(secret_code)
     assert guess.guess_result.correct is True
     assert guess.guess_result.black_pegs == 0

@@ -1,7 +1,7 @@
-from context.game.infrastructure.game_repository import IGameRepository
-from context.game.domain.game import Game
-from context.game.domain.guess import Guess, GuessResult
-from context.game.domain.exceptions import GameNotExistsException
+from context.mastermind.infrastructure.game_repository import IGameRepository
+from context.mastermind.domain.game import Game
+from context.mastermind.domain.guess import Guess, GuessResult
+from context.mastermind.domain.exceptions import GameNotExistsException
 
 
 class GameRepositoryInMemory(IGameRepository):

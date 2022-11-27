@@ -1,6 +1,6 @@
-from context.game.infrastructure.game_repository_in_memory import GameRepositoryInMemory
-from context.game.domain.game import Game
-from context.game.domain.exceptions import GameNotExistsException
+from context.mastermind.infrastructure.game_repository_in_memory import GameRepositoryInMemory
+from context.mastermind.domain.game import Game
+from context.mastermind.domain.exceptions import GameNotExistsException
 import uuid
 import pytest
 
@@ -13,7 +13,7 @@ def test_creating_empty_repository():
     assert num_games == 0
 
 
-game = Game(10, 'ABRB')
+game = Game(10, 'RBRB')
 
 
 def test_add_new_game():
@@ -23,7 +23,7 @@ def test_add_new_game():
 
 
 def test_add_guess_to_game():
-    game.add_guess('AAAA')
+    game.add_guess('RRRR')
     game_repository.save(game)
     num_games = len(game_repository.games.keys())
     assert num_games == 1

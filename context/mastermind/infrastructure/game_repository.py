@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from context.game.domain.game import Game
+from context.mastermind.domain.game import Game
 
 
 class IGameRepository(ABC):

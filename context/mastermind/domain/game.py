@@ -1,16 +1,10 @@
 from __future__ import annotations
-from enum import Enum
 from typing import Optional, List
-from context.game.domain.secret_code import SecretCode
-from context.game.domain.guess import Guess, GuessResult
-from context.game.domain.exceptions import GameOverException, GameWonException
+from context.mastermind.domain.secret_code import SecretCode
+from context.mastermind.domain.guess import Guess, GuessResult
+from context.mastermind.domain.exceptions import GameOverException, GameWonException
+from context.mastermind.domain.game_status import GAME_STATUS
 import uuid
-
-
-class GAME_STATUS(str, Enum):
-    PLAYING = "Playing"
-    WON = "Won"
-    LOST = "Lost"
 
 
 class Game():  # AggregateRoot or Entity
@@ -53,5 +47,7 @@ class Game():  # AggregateRoot or Entity
 
         if (len(self.guesses) >= self.num_guesses):
             self.status = GAME_STATUS.LOST
+
+        guess.guess_result.current_status = self.status
 
         return guess.guess_result

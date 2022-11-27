@@ -1,7 +1,7 @@
-from context.game.command.create_game import CreateGameCommand
-from context.game.infrastructure.game_repository_in_memory import GameRepositoryInMemory
-from context.game.command.create_game_dto import CreateGameDTO
-from context.game.domain.exceptions import CodeWrongException
+from context.mastermind.command.create_game.create_game import CreateGameCommand
+from context.mastermind.command.create_game.create_game_dto import CreateGameDTO
+from context.mastermind.infrastructure.game_repository_in_memory import GameRepositoryInMemory
+from context.mastermind.domain.exceptions import CodeWrongException
 import pytest
 
 gameRepository = GameRepositoryInMemory()
