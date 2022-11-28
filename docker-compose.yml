@@ -6,7 +6,6 @@ services:
     image: secofeixo/mastermind
     build:
       context: .
-      no_cache: true
     ports:
       - 8888:8888
     networks:
